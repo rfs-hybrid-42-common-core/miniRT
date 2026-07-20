@@ -1,0 +1,23 @@
+# ==============================================================================
+# EVALUATION: TRANSLATIONS & ROTATIONS
+# ==============================================================================
+
+A 0.2 255,255,255 
+C 0,0,-15   0,0,1   60
+L 0,10,-10  0.8     255,255,255
+
+# --- TEST 1: Translations ---
+# "Place two spheres at the coordinates {0, 0, 0}..."
+# Currently, both spheres share the exact same coordinates and perfectly overlap.
+# LIVE EDIT REQUIRED: To translate one sphere parallel to the camera by a distance 
+# greater than its diameter (4), change the second sphere's coordinates to 6,0,0.
+sp 0,0,0   4   255,0,0
+sp 0,0,0   4   0,0,255
+
+# --- TEST 2: Rotations ---
+# "Place a cylinder extending along the y axis..."
+# Currently, the normal is strictly vertical (0,1,0).
+# LIVE EDIT REQUIRED: "Then put a 90° rotation (Pi/2 radian) along the z axis".
+# To rotate it 90 degrees around the Z-axis, change the normal vector to 1,0,0. 
+# The cylinder will fall perfectly on its side.
+cy 0,-6,0   0,1,0   3   12   0,255,0

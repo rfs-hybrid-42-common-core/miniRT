@@ -1,0 +1,43 @@
+# ==============================================================================
+# EVALUATION: THE BASIC SHAPES & CAMERA POSITIONS
+# ==============================================================================
+
+A 0.2 255,255,255 
+L 5,10,5 0.6 255,255,255
+
+# --- TEST 1: Camera's position and direction ---
+# Instructions: Uncomment the camera you need to test. Keep the others commented.
+
+# 1. "place the camera extending along the x axis pointed towards the coordinates {0, 0, 0}"
+# Camera on the X-axis (10, 0, 0) pointing at origin (-1, 0, 0).
+C 10,0,0     -1,0,0     70
+
+# 2. "place the camera extending along the y axis pointed towards the coordinates {0, 0, 0}"
+# Camera on the Y-axis (0, 10, 0) pointing at origin (0, -1, 0).
+# C 0,10,0     0,-1,0     70
+
+# 3. "place the camera extending along the z axis pointed towards the coordinates {0, 0, 0}"
+# Camera on the Z-axis (0, 0, 10) pointing at origin (0, 0, -1).
+# C 0,0,10     0,0,-1     70
+
+# 4. "place the camera at a random location which isn't on any axis or a diagonal, pointed towards the coordinates {0, 0, 0}"
+# Camera placed at (7, 4, 5). The orientation vector is mathematically normalized 
+# to point exactly at 0,0,0.
+# C 7,4,5      -0.737,-0.421,-0.527  70
+
+# --- TEST 2: The Basic Shapes (Sphere) ---
+# "Place a sphere at the coordinates {0, 0, 0}."
+# The sphere is perfectly centered at the origin so the camera always looks at it.
+sp 0,0,0 2 255,0,0
+
+# --- TEST 3: The Basic Shapes (Plane) ---
+# "Place a plane with a 'z' value of null."
+# Positioned exactly at Z=0. Dropped to Y=-5 so it acts as a visible floor regardless 
+# of whether the evaluator moves the camera to the X, Y, or Z axis.
+pl 0,-5,0 0,1,0 0,0,255
+
+# --- TEST 4: The Basic Shapes (Cylinder) ---
+# "Place a cylinder extending along the y axis."
+# Normal is perfectly vertical (0,1,0). Placed slightly behind the sphere (Z=3) 
+# so both are clearly visible from the starting X-axis camera.
+cy 0,0,3 0,1,0 2 4 0,255,0

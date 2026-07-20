@@ -1,0 +1,74 @@
+# ==============================================================================
+# ENVIRONMENT
+# ==============================================================================
+
+# Resolution (1024x768)
+R 1024 768
+
+# Ambient Light (Ratio 0.2, White)
+A 0.2   255,255,255
+
+# Camera (Pos: -2.5, 3.0, -5.0 | Dir: 1.0, -2.5, 4.0 | FOV: 120)
+# (Direction is calculated from Look-At point -1.5, 0.5, -1.0 minus Pos)
+C -2.5,3.0,-5.0   0.207,-0.518,0.830   120   ap:0.05   focal:5.0
+
+
+# ==============================================================================
+# LIGHTS
+# ==============================================================================
+
+# Main White Point Light
+L -6.0,2.5,-4.0   1.0   255,255,255   type:point
+
+# Dramatic Red Spotlight
+L -3.0,4.0,-2.0   1.0   255,025,025   type:spot   dir:0,-1,0   in:15   out:30
+
+
+# ==============================================================================
+# STANDALONE GEOMETRIES
+# ==============================================================================
+
+# 1. Glass Sphere (Center)
+sp +0.0,1.00,+0.0                     2.00       000,000,000   mat:0.0,0.1,1.0,300   ref:1.0   glass:1.5,1.0
+
+# 2. Earth Image Sphere (Background Left)
+sp -3.5,1.50,+3.5                     3.00       255,255,255   mat:0.1,0.7,0.0,200   img:./textures/earth.xpm   bump:./textures/earth_bump.xpm,0.5,0.02
+
+# 3. Red & White Marble Sphere (Moving!)
+sp -1.5,0.33,-1.0                     0.66       255,255,255   marble:255,51,51,255,255,255,4,20.0,0.15   mov:-1.5,1.8,-1.0
+
+# 4. Blue & White Cloudy Perlin Sphere
+sp -0.5,0.40,-1.5                     0.80       255,255,255   perlin:51,127,255,255,255,255,2,0.15
+
+# 5. Emerald Green Cone (Midground Left)
+cn -4.5,1.00,+0.5   0.0,1.000,0.000   1.00 1.0   025,204,102   mat:0.1,0.7,0.3,200   caps:1
+
+# 6. Conical Checkered Cone
+cn -6.5,1.00,+0.5   0.0,1.000,0.000   1.00 1.0   255,255,255   mat:0.1,0.7,0.3,200   caps:1   uv_chk:16,8,25,102,204,230,230,230
+
+# 7. UV Checkered Cylinder (Front & Center)
+cy +0.0,1.00,-2.5   0.0,1.000,0.000   1.00 2.0   255,255,255   mat:0.2,0.8,0.3,200   caps:1   uv_chk:16,8,255,204,0,25,25,25   shr:3,0,0,0,0,0
+
+# 8. Torus Donut (Rotated 45 deg via Normal vector 0.0, 0.707, 0.707)
+to +0.0,3.50,+2.5   0.0,0.707,0.707   2.00 0.8   255,127,025   mat:0.1,0.7,0.3,200
+
+
+# ==============================================================================
+# HIERARCHIES & MESHES
+# ==============================================================================
+
+# 9. The Showcase Group
+grp 0.0,2.0,+0.0   0,1,0   1.0                                                             id:showcase
+cb  1.5,0.5,-1.0   0,1,0   1.0       025,025,25   mat:0.0,0.1,1.0,300   ref:0.9            parent:showcase
+cy  2.5,0.0,+1.5   0,1,0   1.0 2.0   204,153,51   mat:0.1,0.6,0.8,200   ref:0.6   caps:1   parent:showcase
+
+# 10. CSG Hollow Box (Difference between Cube and Sphere)
+cb                        0.0,0.0,+0.0   0,1,0   2.0   255,255,255   mat:0.2,0.8,0.3,200   uv_chk:4,4,51,204,153,230,230,230   id:cbox
+sp                        0.0,0.0,+0.0           2.7   025,025,025   mat:0.1,0.6,0.1,200                                       id:hsphere
+csg   diff cbox hsphere   2.5,1.0,-2.0   0,1,0   0.5
+
+# 11. The Utah Teapot!
+obj -3.0,0.0,-2.0   0.5,0.0,0.866   0.15   255,230,230   ./models/teapot.obj   mat:0.1,0.7,0.5,200
+
+# 12. True Cubical Skybox
+cb 0,0,0   0,1,0   500.0   0,0,0   skybox:./textures/breaking_the_habit1.xpm,./textures/breaking_the_habit2.xpm,./textures/breaking_the_habit3.xpm,./textures/breaking_the_habit4.xpm,./textures/breaking_the_habit5.xpm,./textures/breaking_the_habit6.xpm

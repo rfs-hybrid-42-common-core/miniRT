@@ -1,0 +1,23 @@
+# ==============================================================================
+# EVALUATION: BRIGHTNESS 2/2 (SHADOWS)
+# ==============================================================================
+
+A 0.2 255,255,255
+
+# --- TEST 1: Vertical Spot Shadow ---
+# "...put the camera aside so we can see the sphere, the plane and the 
+# sphere's shadow on the plane."
+# The camera is moved far to the top right (15, 10, -15) and angled downward 
+# (-1, -0.5, 1) looking back at the origin.
+C 15,10,-15   -1,-0.5,1   60
+
+# "Place a vertical spot, a sphere and a plane. The spot lighting the sphere's 
+# position to create a sphere shadow on the plane."
+# The light is placed exactly 15 units above the sphere to act as a vertical spot.
+L 0,15,0      0.9         255,255,255
+
+# The floor plane to catch the shadow.
+pl 0,-4,0     0,1,0       200,200,200
+
+# The sphere resting above the floor plane at the origin.
+sp 0,0,0      4           255,0,0

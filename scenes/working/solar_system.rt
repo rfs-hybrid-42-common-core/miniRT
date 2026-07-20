@@ -1,0 +1,138 @@
+# ==============================================================================
+# miniRT - The Solar System (Cinematic Orbital View)
+# ==============================================================================
+
+# --- Environment ---
+R 1280 720
+A 0.02   255,255,255
+
+# The "Crane Shot" - High up, pulled far back, looking down towards the Sun
+C 0,180,-620   0,-0.316,0.948   60
+
+# --- The Skydome ---
+sp 0,0,0   6000   0,0,0   dome:./textures/stars.xpm
+
+# ==============================================================================
+# THE SUN & LIGHTING
+# ==============================================================================
+
+sp 0,0,0   30   255,220,100   img:./textures/sun.xpm   mat:1.0,0.0,0.0,0.0
+
+# The 6-Point Light Array (Safe 0.4 intensity to prevent Terminator Blowout)
+L +15.1,+00.0,+00.0   .4   255,240,200
+L -15.1,+00.0,+00.0   .4   255,240,200
+L +00.0,+15.1,+00.0   .4   255,240,200
+L +00.0,-15.1,+00.0   .4   255,240,200
+L +00.0,+00.0,+15.1   .4   255,240,200
+L +00.0,+00.0,-15.1   .4   255,240,200
+
+# ==============================================================================
+# PLANETARY ORBITS (Scattered across X and Z axes)
+# ==============================================================================
+
+# 1. Mercury (Close, bottom-left)
+sp -035,0,-015                  02.5       169,169,169   img:./textures/mercury.xpm   mat:0.1,0.9,0.1,10
+
+# 2. Venus (Mid, top-right)
+sp +055,0,+020                  06.0       222,184,135   img:./textures/venus.xpm     mat:0.1,0.8,0.3,30
+
+# 3. Earth & Moon (Mid, bottom-right)
+sp +085,0,-040                  07.0       050,100,255   img:./textures/earth.xpm     mat:0.1,0.7,0.2,50   bump:./textures/earth_bump.xpm,1.0,0.001  mov:85,0,-40.5
+sp +094,2,-035                  01.8       180,180,180   img:./textures/moon.xpm      mat:0.1,0.9,0.0,10   bump:./textures/moon_bump.xpm,00.2,0.050  
+
+# 4. Mars (Mid, far-left)
+sp -065,0,-080                  03.5       193,068,014   img:./textures/mars.xpm      mat:0.1,0.9,0.1,10
+
+# 5. Jupiter (Deep, top-left)
+sp -120,0,+100                  18.0       201,144,057   img:./textures/jupiter.xpm   mat:0.1,0.9,0.2,15
+
+# 6. Saturn (Deep, top-right)
+# Rings angled to face the high camera
+sp +050,0,+180                  14.0       230,210,170   img:./textures/saturn.xpm
+to +050,0,+180   -0.2,0.8,0.3   26.0 0.2   200,180,140   img:./textures/saturn_ring_alpha.xpm
+
+# 7. Uranus (Very deep, far bottom-left)
+sp -220,0,-120                  10.0       173,216,230   img:./textures/uranus.xpm    mat:0.1,0.8,0.3,30
+
+# 8. Neptune (Extreme deep, far bottom-right)
+sp +260,0,-180                  10.0       000,000,128   img:./textures/neptune.xpm   mat:0.1,0.8,0.3,30
+
+# ==============================================================================
+# ORBITAL RINGS (The Orrery Effect)
+# ==============================================================================
+
+# Pure Emissive Baby Blue Rings (mat:1.0,0.0,0.0,0.0)
+
+# Mercury's Orbit
+to 0,0,0   0,1,0   076.16 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Venus's Orbit
+to 0,0,0   0,1,0   117.05 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Earth's Orbit
+to 0,0,0   0,1,0   187.88 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Mars's Orbit
+to 0,0,0   0,1,0   206.16 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Jupiter's Orbit
+to 0,0,0   0,1,0   312.41 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Saturn's Orbit
+to 0,0,0   0,1,0   373.63 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Uranus's Orbit
+to 0,0,0   0,1,0   501.20 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# Neptune's Orbit
+to 0,0,0   0,1,0   632.46 0.8   180,220,255   mat:1.0,0.0,0.0,0
+
+# ==============================================================================
+# THE ASTEROID BELT (Orbiting between Mars and Jupiter)
+# ==============================================================================
+
+# A scattered ring of low-poly .obj meshes with rocky, matte materials.
+
+# Quadrant 1 (0 to 90 degrees)
+obj +130,-2,+000   0,1,0   0.0010   130,130,130   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +128,+1,+022   1,0,0   0.0008   120,120,120   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +112,-1,+041   0,1,1   0.0015   140,140,140   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +112,+3,+065   1,1,0   0.0012   110,110,110   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +105,+0,+088   0,0,1   0.0009   135,135,135   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +085,-3,+101   1,0,1   0.0011   125,125,125   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +065,+2,+112   0,1,0   0.0016   115,115,115   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +044,-2,+122   1,0,0   0.0008   130,130,130   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +022,+0,+128   1,1,1   0.0013   145,145,145   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +000,-1,+130   0,1,1   0.0010   120,120,120   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+
+# Quadrant 2 (90 to 180 degrees)
+obj -022,+1,+128   1,0,1   0.0009   135,135,135   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -044,-3,+122   0,1,0   0.0012   110,110,110   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -065,+2,+112   1,1,0   0.0015   140,140,140   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -085,+0,+101   0,0,1   0.0011   125,125,125   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -105,-1,+088   1,0,0   0.0008   130,130,130   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -112,+3,+065   0,1,1   0.0014   115,115,115   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -112,-2,+041   1,1,1   0.0009   145,145,145   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -128,+0,+022   1,0,1   0.0012   120,120,120   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -130,-1,+000   0,1,0   0.0010   135,135,135   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+
+# Quadrant 3 (180 to 270 degrees)
+obj -128,+2,-022   1,1,0   0.0013   110,110,110   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -112,+0,-041   0,0,1   0.0008   125,125,125   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -112,-3,-065   1,0,0   0.0011   140,140,140   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -105,+1,-088   0,1,1   0.0015   130,130,130   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -085,-1,-101   1,0,1   0.0009   115,115,115   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -065,+3,-112   0,1,0   0.0014   135,135,135   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -044,+0,-122   1,1,1   0.0010   120,120,120   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj -022,-2,-128   1,1,0   0.0012   145,145,145   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +000,+1,-130   0,0,1   0.0008   110,110,110   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+
+# Quadrant 4 (270 to 360 degrees)
+obj +022,-1,-128   1,0,0   0.0013   125,125,125   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +044,+2,-122   0,1,1   0.0011   130,130,130   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +065,-3,-112   1,0,1   0.0009   140,140,140   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +085,+0,-101   0,1,0   0.0015   115,115,115   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +105,+1,-088   1,1,1   0.0010   135,135,135   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +112,-2,-065   1,1,0   0.0014   120,120,120   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +112,+2,-041   0,0,1   0.0008   145,145,145   ./models/asteroid.obj   mat:0.1,0.8,0.1,10
+obj +128,-1,-022   1,0,0   0.0012   110,110,110   ./models/asteroid.obj   mat:0.1,0.8,0.1,10

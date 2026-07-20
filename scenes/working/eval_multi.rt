@@ -1,0 +1,24 @@
+# ==============================================================================
+# EVALUATION: MULTI-OBJECTS & INTERSECTIONS
+# ==============================================================================
+
+A 0.2 255,255,255
+C 0,2,-15   0,0,1   60
+L 5,10,-10  0.8     255,255,255
+
+# --- TEST 1: Intersections ---
+# "Place several intersecting objects on the scene..."
+# The sphere and the first cylinder share the exact same origin coordinate.
+# The sphere has a diameter of 4, while the cylinder has a diameter of 3. 
+# The cylinder will cleanly punch right through the center of the sphere.
+sp 0,0,0   4       255,0,0
+cy 0,0,0   0,1,0   3   8   0,255,0
+
+# --- TEST 2: Multiple Instances ---
+# "...place the same object several times, for example two cylinders, 
+# two spheres and a plane."
+# We already have one sphere and one cylinder. Here are the duplicates, 
+# offset to the sides, plus the required floor plane.
+sp -6,0,0  3       0,0,255
+cy 6,0,0   1,0,0   2   4   255,255,0
+pl 0,-4,0  0,1,0   200,200,200

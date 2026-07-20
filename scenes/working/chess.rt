@@ -1,0 +1,203 @@
+# ==============================================================================
+# miniRT - The Chess Chamber
+# ==============================================================================
+
+# --- Environment & Settings ---
+R 1024 768
+A 0.1   255,255,255
+
+# Camera positioned in the corner, looking down at the table center
+C -14,18,-20   0.5,-0.3,0.7   60   ap:0.02   focal:8.0
+
+# Main Area Light (Warm overhead light for Soft Shadows)
+L +00,30,+00   0.8   255,240,220   type:area   uvec:6,0,0   ustep:8   vvec:0,0,6   vstep:8
+
+# Secondary Fill Light (Co-located with camera to hide its shadows)
+L -12,15,-16   0.2   200,220,255   type:area   uvec:8,0,0   ustep:8   vvec:0,8,0   vstep:8
+
+# ==============================================================================
+# ENCLOSED CUBIC ROOM (Cornell Box Style with Stripes)
+# ==============================================================================
+
+# Ceiling (White, no stripes to keep bounce light clean)
+pl +00,+40.00,+00   +0,-1,+0   220,220,220   mat:0.2,0.8,0.1,010
+
+# Back Wall (White & Light Grey Stripes)
+pl +00,+00.00,+40   +0,+0,-1   220,220,220   mat:0.2,0.8,0.1,010
+
+# Front Wall (Behind Camera) (White & Light Grey Stripes)
+pl +00,+00.00,-40   +0,+0,+1   220,220,220   mat:0.2,0.8,0.1,010
+
+# Left Wall (Red & Dark Red Stripes)
+pl -40,+00.00,+00   +1,+0,+0   200,050,050   mat:0.2,0.8,0.1,010   str:200,50,50,130,30,30
+
+# Right Wall (Green & Dark Green Stripes)
+pl +40,+00.00,+00   -1,+0,+0   050,200,050   mat:0.2,0.8,0.1,010   str:50,200,50,30,130,30
+
+# Simple grey floor plane to ground the table and catch shadows
+pl +00,-00.01,+00   +0,+1,+0   150,150,150   mat:0.1,0.9,0.9,200
+
+# ==============================================================================
+# WOODEN DOOR (Triangles, Frosted Glass, & Brass Knob)
+# ==============================================================================
+
+# --- Left Frame Stile (Wood) ---
+tr 12.0,00.00,39.90   14,00,39.90   12,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+tr 14.0,00.00,39.90   14,22,39.90   12,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+
+# --- Right Frame Stile (Wood) ---
+tr 22.0,00.00,39.90   24,00,39.90   22,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+tr 24.0,00.00,39.90   24,22,39.90   22,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+
+# --- Bottom Frame Rail (Wood) ---
+tr 14.0,00.00,39.90   22,00,39.90   14,10,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+tr 22.0,00.00,39.90   22,10,39.90   14,10,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+
+# --- Top Frame Rail (Wood) ---
+tr 14.0,18.00,39.90   22,18,39.90   14,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+tr 22.0,18.00,39.90   22,22,39.90   14,22,39.90   0,0,0   1,0,0   0,1,0   100,050,020   mat:0.2,0.7,0.1,10
+
+# --- Frosted Glass Pane (Recessed to Z=39.95) ---
+tr 14.0,10.00,39.95   22,10,39.95   14,18,39.95   0,0,0   1,0,0   0,1,0   200,220,230   mat:0.1,0.9,0.9,200   glass:1.5,0.7
+tr 22.0,10.00,39.95   22,18,39.95   14,18,39.95   0,0,0   1,0,0   0,1,0   200,220,230   mat:0.1,0.9,0.9,200   glass:1.5,0.7
+
+# --- Brass Door Knob & Backplate ---
+# 1. Dark Grey Metal Backplate (Sits flush against the Z=39.9 door)
+cy 13.2,11.50,39.85   0,0,-1   1.2 0.1   100,100,100   mat:0.2,0.7,0.5,100   caps:1
+
+# 2. Brass Stem/Neck (Connects the backplate to the knob)
+cy 13.2,11.50,39.65   0,0,-1   0.3 0.3   220,200,100   mat:0.3,0.7,0.9,200
+
+# 3. Brass Sphere Knob (Pushed out to Z=39.35 for hand clearance)
+sp 13.2,11.50,39.35            0.8       220,200,100   mat:0.3,0.7,0.9,200
+
+# ==============================================================================
+# CHANDELIER (CSG Demonstration)
+# ==============================================================================
+
+# Ceiling Mount
+cy                                    0,39.5,0   0,1,0   2.0 1.0   030,030,035   mat:0.2,0.6,0.8,050   caps:1
+
+# Central Support Cable/Rod
+cy                                    0,37.0,0   0,1,0   0.1 4.0   030,030,035   mat:0.2,0.6,0.8,050
+
+# --- Chandelier Shade (CSG Difference) ---
+cy                                    0,00.0,0   0,1,0   8.0 3.0   212,175,055   mat:0.2,0.6,0.5,150   caps:1   id:shade_outer
+cy                                    0,00.0,0   0,1,0   7.6 3.2   212,175,055   mat:0.2,0.6,0.5,150   caps:1   id:shade_inner
+csg   diff shade_outer shade_inner    0,35.0,0   0,1,0   1.0                                                    id:chandelier_shade
+
+# --- Light Bulb (CSG Union) ---
+# Emissive Glass Bulb (Ambient 1.0 makes it glow pure white without self-shadowing)
+sp                                    0,00.0,0               2.0   255,255,255   mat:1.0,0.0,0.5,200            id:bulb_glass
+# Dark Grey Metal Socket
+cy                                    0,01.2,0   0,1,0   1.0 1.5   050,050,055   mat:0.2,0.6,0.3,050   caps:1   id:bulb_socket
+csg   union bulb_glass bulb_socket    0,35.5,0   0,1,0   1.0                                                    id:chandelier_bulb
+
+# ==============================================================================
+# TABLE BASE
+# ==============================================================================
+
+# New Conic Base (Anchors the table to the floor)
+cn 0,3.0,0   0,1,0   4.0 3.0   40,40,40   mat:0.2,0.6,0.3,50
+
+# Central cylinder pedestal.
+cy 0,4.5,0   0,1,0   1.0 9.0   40,40,40   mat:0.2,0.6,0.3,50
+
+# ==============================================================================
+# TABLETOP (Solid Parallelepiped, Thickened to Y=8.5)
+# ==============================================================================
+
+# --- Top Face (Y=9.0) ---
+tr -5,9.0,-5   +5,9.0,-5   -5,9.0,+5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr  5,9.0,-5   +5,9.0,+5   -5,9.0,+5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# --- Bottom Face (Y=8.5) ---
+tr -5,8.5,-5   +5,8.5,-5   -5,8.5,+5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr  5,8.5,-5   +5,8.5,+5   -5,8.5,+5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# --- Front Face (Z=5.0) ---
+tr -5,8.5,+5   +5,8.5,+5   -5,9.0,+5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr  5,8.5,+5   +5,9.0,+5   -5,9.0,+5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# --- Back Face (Z=-5.0) ---
+tr -5,8.5,-5   +5,8.5,-5   -5,9.0,-5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr  5,8.5,-5   +5,9.0,-5   -5,9.0,-5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# --- Right Face (X=5.0) ---
+tr  5,8.5,-5   +5,8.5,+5   +5,9.0,-5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr  5,8.5,+5   +5,9.0,+5   +5,9.0,-5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# --- Left Face (X=-5.0) ---
+tr -5,8.5,-5   -5,8.5,+5   -5,9.0,-5   0,0,0   1,0,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+tr -5,8.5,+5   -5,9.0,+5   -5,9.0,-5   1,0,0   1,1,0   0,1,0   100,50,20   mat:0.2,0.7,0.1,10
+
+# ==============================================================================
+# CHESSBOARD (8x8 Grid, Elevated to Y=3.01)
+# ==============================================================================
+
+# Triangle 1 
+tr -4,9.01,-4   4,9.01,-4  -4,9.01,4   0,0,0   1,0,0   0,1,0   255,255,255   mat:0.1,0.9,0.9,200   chk:0,0,0,255,255,255
+# Triangle 2 
+tr  4,9.01,-4   4,9.01,4   -4,9.01,4   1,0,0   1,1,0   0,1,0   255,255,255   mat:0.1,0.9,0.9,200   chk:0,0,0,255,255,255
+
+# ==============================================================================
+# CHAIRS (Player 1 & Player 2 Stools)
+# ==============================================================================
+
+# --- Player 1 Stool (Left Side, X = -7.5) ---
+# Stool Base
+cn -7.5,2.00,0   0,1,0   2.5 2.0   040,40,40   mat:0.2,0.6,0.3,50
+# Stool Leg
+cy -7.5,2.75,0   0,1,0   0.5 5.5   040,40,40   mat:0.2,0.6,0.3,50
+# Stool Seat (Wood)
+cy -7.5,5.50,0   0,1,0   3.0 0.5   100,50,20   mat:0.2,0.7,0.1,10   caps:1
+
+# --- Player 2 Stool (Right Side, X = 7.5) ---
+# Stool Base
+cn +7.5,2.00,0   0,1,0   2.5 2.0   040,40,40   mat:0.2,0.6,0.3,50
+# Stool Leg
+cy +7.5,2.75,0   0,1,0   0.5 5.5   040,40,40   mat:0.2,0.6,0.3,50
+# Stool Seat (Wood)
+cy +7.5,5.50,0   0,1,0   3.0 0.5   100,50,20   mat:0.2,0.7,0.1,10   caps:1
+
+# ==============================================================================
+# IMPORTED MODELS (Chess Pieces)
+# ==============================================================================
+
+# White Pieces (Player 1 Side: X = -3.5)
+grp +0.0,9.02,+0.0   0,1,0   1.0                                       id:white_pieces       
+obj -2.5,0.00,-3.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,-2.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,-1.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,-0.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,+0.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,+1.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,+2.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -2.5,0.00,+3.5   0,1,0   1.0   255,250,240   ./models/pawn.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,-3.5   0,1,0   1.0   255,250,240   ./models/rook.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,-2.5   0,1,0   1.0   255,250,240   ./models/knight.obj   parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4   rot:0,+90,0
+obj -3.5,0.00,-1.5   0,1,0   1.0   255,250,240   ./models/bishop.obj   parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,-0.5   0,1,0   1.0   255,250,240   ./models/king.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,+0.5   0,1,0   1.0   255,250,240   ./models/queen.obj    parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,+1.5   0,1,0   1.0   255,250,240   ./models/bishop.obj   parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+obj -3.5,0.00,+2.5   0,1,0   1.0   255,250,240   ./models/knight.obj   parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4   rot:0,+90,0
+obj -3.5,0.00,+3.5   0,1,0   1.0   255,250,240   ./models/rook.obj     parent:white_pieces   mat:0.1,0.7,0.5,120   glass:1.5,0.4
+
+# Black Pieces (Player 2 Side: X = 3.5)
+grp +0.0,9.02,+0.0   0,1,0   1.0                                       id:black_pieces       
+obj +2.5,0.00,-3.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,-2.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,-1.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,-0.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,+0.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,+1.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,+2.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +2.5,0.00,+3.5   0,1,0   1.0   040,040,045   ./models/pawn.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,-3.5   0,1,0   1.0   040,040,045   ./models/rook.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,-2.5   0,1,0   1.0   040,040,045   ./models/knight.obj   parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4   rot:0,-90,0
+obj +3.5,0.00,-1.5   0,1,0   1.0   040,040,045   ./models/bishop.obj   parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,-0.5   0,1,0   1.0   040,040,045   ./models/king.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,+0.5   0,1,0   1.0   040,040,045   ./models/queen.obj    parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,+1.5   0,1,0   1.0   040,040,045   ./models/bishop.obj   parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4
+obj +3.5,0.00,+2.5   0,1,0   1.0   040,040,045   ./models/knight.obj   parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4   rot:0,-90,0
+obj +3.5,0.00,+3.5   0,1,0   1.0   040,040,045   ./models/rook.obj     parent:black_pieces   mat:0.1,0.6,0.7,120   glass:1.5,0.4

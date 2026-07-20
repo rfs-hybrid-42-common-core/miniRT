@@ -1,0 +1,29 @@
+# ==============================================================================
+# EVALUATION: BRIGHTNESS 1/2 (SIDEWAYS LIGHTING)
+# ==============================================================================
+
+# Ambient light is kept very low (0.1) so the sideways halo effect is highly visible.
+A 0.1 255,255,255
+
+# The camera is centered between the two spheres.
+C 2.5,0,-15   0,0,1   60
+
+# The light is positioned far to the left (-15) to hit the spheres sideways.
+L -15,0,-10   0.8     255,255,255
+
+# --- TEST 1: Sideways Lighting at Origin ---
+# "Place a sphere at the coordinates {0, 0, 0}, the camera facing the sphere, 
+# and put a spot left or right of the camera... The sphere should be visible, 
+# illuminated and displayed without glitching."
+# This red sphere sits exactly at the origin and will have a bright left side 
+# fading into a dark right side.
+# sp 0,0,0   4   255,0,0
+
+# --- TEST 2: Sideways Lighting after Translation ---
+# "Place a sphere at some coordinates resulting from a translation... 
+# Properly means that the halo of light should be computed after translation 
+# not before."
+# This blue sphere is translated 5 units to the right (X=5). The light halo 
+# will wrap around it perfectly, proving your normal vectors calculate 
+# correctly after translations are applied to the geometry.
+sp 5,0,0   4   0,0,255
